@@ -1,7 +1,6 @@
 package transcript
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/horiagug/youtube-transcript-api-go/pkg/yt_transcript"
@@ -13,15 +12,14 @@ type Transcription struct {
 	Duration time.Duration
 }
 
-func FetchTranscription(videoID string, languages []string) {
+func FetchTranscription(videoID string, languages []string) (string, error) {
 
 	client := yt_transcript.NewClient()
 
 	transcript, err := client.GetFormattedTranscripts(videoID, languages, true)
 	if err != nil {
-		panic(err)
+		return "", nil
 	}
 
-	fmt.Println(transcript)
-
+	return transcript, nil
 }
